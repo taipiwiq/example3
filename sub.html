@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lottery</title>
+    <style>
+
+/* アニメーション */
+@keyframes fadeIn {
+    0% {
+        opacity: 1;
+        transform: scale(0.1); /* 初期位置: 小さく */
+    }
+    50% {
+        opacity: 1;
+        transform: scale(.5); /* 中心から80%大きくなる */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1); /* 最終的に元のサイズに戻る */
+    }
+}
+
+body {
+    background-image: url(R.jpg);
+    background-size: cover;
+}
+
+.lottery-image {
+    width: 100%;
+    height: 750px;
+    display: none;
+    object-fit: contain;
+    font-size: 450px;
+    text-align: center;
+    color: red;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.keihin {
+    text-align: center;
+    font-size: 85px;
+    margin-top: 20px;
+    color: white;
+}
+
+#navigateButton {
+    font-size: 30px;
+}
+
+.button {
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .lottery-image {
+        width: 100%;
+        height: 650px;
+        display: none;
+        object-fit: contain;
+        font-size: 70px;
+        text-align: center;
+        color: red;
+        animation: fadeIn 1.5s ease-out forwards; /* 同じアニメーション */
+    }
+
+    .keihin {
+        text-align: center;
+        font-size: 80px;
+        margin-top: 20px;
+        color: black;
+    }
+
+    #navigateButton {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .button {
+        text-align: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+    
+        <div class="keihin">景品紹介</div>
+        <div id="lottery">
+            <div class="lottery-image" id="prize1" >１等賞</div>
+            <img class="lottery-image" id="prize2" src="LINE_ALBUM_930ピノ_241008_2.jpg" alt="景品1">
+            <div class="lottery-image" id="prize3" >２等賞</div>
+            <img class="lottery-image" id="prize4" src="LINE_ALBUM_2024.10.07 くらら子_241008_1.jpg" alt="景品2">
+            <div class="lottery-image" id="prize5" >３等賞</div>
+            <img class="lottery-image" id="prize6" src="LINE_ALBUM_2024.9.29ピノ子_241110_1.jpg" alt="景品3">
+            <div class="lottery-image" id="prize7" >４等賞</div>
+            <img class="lottery-image" id="prize8" src="LINE_ALBUM_2024.9.29ピノ子_241110_2.jpg" alt="景品4">
+            <div class="lottery-image" id="prize9" >５等賞</div>
+            <img class="lottery-image" id="prize10" src="LINE_ALBUM_2024.10.06 くらら子_241110_3.jpg" alt="景品5">
+        </div>
+
+        <div class = "button">
+            <button id = "navigateButton">抽選へ</button>
+        </div>
+    <script>
+
+        var soundEffect = new Audio('yoru no zattou.mp3');
+            // 5秒ごとに景品表示
+            let currentPrize = 0;
+            const prizes = document.querySelectorAll('.lottery-image');
+            const totalPrizes = prizes.length;
+        
+            // 最初に最初の画像を表示
+            prizes[currentPrize].style.display = 'block';
+        
+            // 5秒ごとに次の画像を表示
+            function showNextPrize() {
+
+                soundEffect.play();
+                if (currentPrize < totalPrizes - 1) { // 最後の画像に達していなければ
+                    prizes[currentPrize].style.display = 'none';  // 現在の画像を非表示に
+                    currentPrize = currentPrize + 1;  // 次の画像を表示する
+                    prizes[currentPrize].style.display = 'block';  // 次の画像を表示
+                }
+            }
+        
+            // 5秒ごとに順次表示
+            setInterval(showNextPrize, 5000);
+
+            // ボタンを取得
+        const button = document.getElementById('navigateButton');
+
+// ボタンクリック時の動作
+button.addEventListener('click', function() {
+    // 遷移先のURLを指定
+    const targetUrl = "lottery.html";
+
+    // 指定されたページに遷移
+    window.location.href = targetUrl;
+});
+        </script>
+        
+
+</body>
+</html>
